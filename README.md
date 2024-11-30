@@ -11,6 +11,9 @@ The PREPARED Home Safety Advisor educates families on the fundamentals of emerge
 2. [FEMA_Census_Tract_Cleaning.ipynb](https://github.com/PREPARED-AI-Studio-Project/PREPARED-Project/blob/main/FEMA_Census_Tract_Cleaning.ipynb)
 3. [OllamaHost.ipynb](https://github.com/PREPARED-AI-Studio-Project/PREPARED-Project/blob/main/OllamaHost.ipynb)
 
+### Model Installation Instruction
+??
+
 #### Contributors: Yvette Roos, Keta Patel, Glenvelis Perez, Sukanya Iyer, Ula Nguyen <br>
 **Challenge Advisors**: Billy Zimmer & Andre Fonseca <br>
 **AI Studio TA**: Swathi Senthil <br>
