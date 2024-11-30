@@ -1,3 +1,5 @@
+## PREPARED Home Safety Advisor
+
 ### Context
 Los Angeles is particularly vulnerable to the destructive effects of wildfires, flooding, mudslides, earthquakes, and extreme heat, making emergency preparedness a critical need for families in the area .
 
@@ -9,4 +11,8 @@ The PREPARED Home Safety Advisor educates families on the fundamentals of emerge
 2. [FEMA_Census_Tract_Cleaning.ipynb](https://github.com/PREPARED-AI-Studio-Project/PREPARED-Project/blob/main/FEMA_Census_Tract_Cleaning.ipynb)
 3. [OllamaHost.ipynb](https://github.com/PREPARED-AI-Studio-Project/PREPARED-Project/blob/main/OllamaHost.ipynb)
 
-#### Contributors: Yvette Roos, Keta Patel, Glenvelis Perez, Sukanya Iyer, Ula Nguyen
+#### Contributors: Yvette Roos, Keta Patel, Glenvelis Perez, Sukanya Iyer, Ula Nguyen <br>
+**Challenge Advisors**: Billy Zimmer & Andre Fonseca <br>
+**AI Studio TA**: Swathi Senthil <br>
+Break Through Tech AI @ MIT <br>
+Fall 2024
