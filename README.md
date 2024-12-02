@@ -9,7 +9,7 @@ The PREPARED Home Safety Advisor educates families on the fundamentals of emerge
 ### File Order
 1. [Clean_LA_Hazard_Dataset_&_Create_Text_Corpus.ipynb](https://github.com/PREPARED-AI-Studio-Project/PREPARED-Project/blob/main/Clean_LA_Hazard_Dataset_%26_Create_Text_Corpus.ipynb)
 2. [FEMA_Census_Tract_Cleaning.ipynb](https://github.com/PREPARED-AI-Studio-Project/PREPARED-Project/blob/main/FEMA_Census_Tract_Cleaning.ipynb)
-4. [FEMA_Data_Sentences_Merged_with_LA_County_Hazard_Data_Sentences.ipynb]([https://github.com/PREPARED-AI-Studio-Project/PREPARED-Project/blob/main/FEMA_Census_Tract_Cleaning.ipynb](https://github.com/PREPARED-AI-Studio-Project/PREPARED-Project/blob/main/FEMA_Data_Sentences_Merged_with_LA_County_Hazard_Data_Sentences.ipynb))
+4. [FEMA_Data_Sentences_Merged_with_LA_County_Hazard_Data_Sentences.ipynb](https://github.com/PREPARED-AI-Studio-Project/PREPARED-Project/blob/main/FEMA_Data_Sentences_Merged_with_LA_County_Hazard_Data_Sentences.ipynb)
 5. [OllamaHost.ipynb](https://github.com/PREPARED-AI-Studio-Project/PREPARED-Project/blob/main/OllamaHost.ipynb)
 
 ### Model Installation Instruction
