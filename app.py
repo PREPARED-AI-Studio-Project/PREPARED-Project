@@ -5,6 +5,7 @@ import os
 import re
 import pandas as pd 
 
+
 # Function to load and preprocess the custom text file
 def load_text_file(Prepared_data):
     file_path = os.path.join(os.getcwd(), Prepared_data)  # Ensure file is in the same directory
@@ -65,6 +66,22 @@ def search_recommendations(data, query):
     ]
     return results
 
+# Query classification function
+def classify_query(query):
+    greetings = ["hi", "hello", "how are you", "good morning", "good evening"]
+    jokes = ["tell me a joke", "make me laugh"]
+    preparedness_keywords = ["prepared", "hazard", "risk", "emergency", "earthquake", "flood"]
+
+    query_lower = query.lower()
+    if any(greet in query_lower for greet in greetings):
+        return "greeting"
+    elif any(joke in query_lower for joke in jokes):
+        return "joke"
+    elif any(keyword in query_lower for keyword in preparedness_keywords):
+        return "preparedness"
+    else:
+        return "general"
+
 
 
 # Load custom data
@@ -100,9 +117,13 @@ chain = prompt | model
 # Streamlit app setup
 st.title("Preparedness Chatbot")
 
+
+
 # Initialize session state to keep conversation history
 if "context" not in st.session_state:
-    st.session_state["context"] = ""
+    st.session_state["context"] = []
+
+
 
 # Input form for user prompt
 user_query = st.text_input("Ask about your area's preparedness or risks:")
@@ -110,58 +131,68 @@ user_query = st.text_input("Ask about your area's preparedness or risks:")
 if st.button("Submit"):
     st.write("Processing your query...")
 
-    # Step 1: Extract location details
-    zip_code, address = extract_location_details(user_query)
+    # Step 1: Classify the user query
+    query_type = classify_query(user_query)
 
-    # Step 2: Check for hazards
-    hazard_info = find_hazards(custom_data, zip_code, address)
-    
-    # Step 3: Build the response context
-    preparedness_data = ""
-    amazon_recommendations = ""
+    if query_type == "greeting":
+        response = "Hi! I'm good, thank you! How can I assist you today?"
+        st.session_state["context"].append(f"AI: {response}")
+        st.write(response)
 
-    if hazard_info:
-        preparedness_data += f"- Hazard Information: {hazard_info}\n"
+    elif query_type == "joke":
+        response = "Why don’t skeletons fight each other? They don’t have the guts!"
+        st.session_state["context"].append(f"AI: {response}")
+        st.write(response)
 
-        # Find relevant FEMA guidelines
-        hazard_type = "earthquake" if "earthquake" in hazard_info.lower() else "flood" if "flood" in hazard_info.lower() else "hazard"
-        fema_guidelines = find_fema_guidelines(custom_data, hazard_type)
-        if fema_guidelines:
-            preparedness_data += f"- FEMA Guidelines: {fema_guidelines}\n"
+    elif query_type == "preparedness":
+        # Step 2: Extract location details
+        zip_code, address = extract_location_details(user_query)
 
-        # Search for hazard-specific product recommendations
-        recommendations = search_recommendations(amazon_data, hazard_type)
-        if not recommendations.empty:
-            for _, row in recommendations.iterrows():
-                amazon_recommendations += f"- **Item**: {row['Items to be purchased or self supplied']} | **Details**: {row['Notes/Information']} | **Buy Here**: {row['Amazon Item (placeholder)']}\n"
+        # Step 3: Check for hazards
+        hazard_info = find_hazards(custom_data, zip_code, address)
+
+        preparedness_data = ""
+        amazon_recommendations = ""
+
+        if hazard_info:
+            preparedness_data += f"- Hazard Information: {hazard_info}\n"
+
+            # Find relevant FEMA guidelines
+            hazard_type = "earthquake" if "earthquake" in hazard_info.lower() else "flood" if "flood" in hazard_info.lower() else "hazard"
+            fema_guidelines = find_fema_guidelines(custom_data, hazard_type)
+            if fema_guidelines:
+                preparedness_data += f"- FEMA Guidelines: {fema_guidelines}\n"
+
+            # Search for recommendations
+            recommendations = search_recommendations(amazon_data, hazard_type)
+            if not recommendations.empty:
+                for _, row in recommendations.iterrows():
+                    amazon_recommendations += f"- **Item**: {row['Items to be purchased or self supplied']} | **Details**: {row['Notes/Information']} | **Buy Here**: {row['Amazon Item (placeholder)']}\n"
+
+        # Invoke Llama 3 model
+        result = chain.invoke({
+            "preparedness_data": preparedness_data,
+            "amazon_data": amazon_recommendations,
+            "context": st.session_state["context"],
+            "question": user_query
+        })
+
+        # Append chatbot response to history
+        st.session_state["context"].append(f"AI: {result}")
+        st.write("### Here’s how you and your family should be prepared:")
+        st.write(result)
+
+        # Add Amazon recommendations
+        if amazon_recommendations:
+            st.write("### Amazon Recommendations:")
+            for line in amazon_recommendations.split("\n"):
+                if line.strip():
+                    st.write(line)
 
     else:
-        # If no specific hazards are found, fallback to general product recommendations
-        recommendations = search_recommendations(amazon_data, user_query)
-        if not recommendations.empty:
-            for _, row in recommendations.iterrows():
-                amazon_recommendations += f"- **Item**: {row['Items to be purchased or self supplied']} | **Details**: {row['Notes/Information']} | **Buy Here**: {row['Amazon Item (placeholder)']}\n"
+        response = "I'm here to assist with preparedness-related questions. Can you clarify your request?"
+        st.session_state["context"].append(f"AI: {response}")
+        st.write(response)
 
-    # Step 4: Invoke the Llama 3 model for detailed, personalized responses
-    result = chain.invoke({
-        "preparedness_data": preparedness_data,
-        "amazon_data": amazon_recommendations,
-        "context": st.session_state["context"],
-        "question": user_query
-    })
-
-
-    # Display the result
-    st.write("### Here’s how you and your family should be prepared:")
-    st.write(result)
-    
-    # Add Amazon recommendations
-    if amazon_recommendations:
-        st.write("### Amazon Recommendations:")
-        for line in amazon_recommendations.split("\n"):
-            if line.strip():
-                st.write(line)
-
-
-    # Update conversation context
-    st.session_state["context"] += f"\nUser: {user_query}\nAI: {result}"
+    # Append user query to context
+    st.session_state["context"].append(f"User: {user_query}")
