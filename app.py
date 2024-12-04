@@ -6,6 +6,8 @@ import re
 import pandas as pd 
 
 
+
+        
 # Function to load and preprocess the custom text file
 def load_text_file(Prepared_data):
     file_path = os.path.join(os.getcwd(), Prepared_data)  # Ensure file is in the same directory
