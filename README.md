@@ -17,10 +17,9 @@ The PREPARED Home Safety Advisor educates families on the fundamentals of emerge
 9. [app.py](https://github.com/PREPARED-AI-Studio-Project/PREPARED-Project/blob/main/app.py)
 
 ### Model Installation Instruction
-To run a local version: <br>
-Local App Installation Instructions
+**Local App Installation Instructions** <br>
 
-Download Required Files
+**Download Required Files**
 Ensure the following files are downloaded to the same folder on your computer:
 
 Localapp.py
@@ -28,17 +27,18 @@ Prepared_data.txt
 amazon_link.csv
 requirements.txt
 
-Install Required Dependencies
+**Install Required Dependencies**
 Open a terminal in the folder containing the files and run the following command to install dependencies:
 "pip install -r requirements.txt"
 
-Run the App
+**Run the App**
 Start the app by running the following command in the terminal:
 "streamlit run Localapp.py"
 
 
-Remote App Installation Instructions
-Download Required Files
+**Remote App Installation Instructions** <br>
+
+**Download Required Files**
 Ensure the following files are downloaded to the same folder on your computer:
 
 Remoteapp.py
@@ -47,13 +47,13 @@ Prepared_data.txt
 amazon_link.csv
 requirements.txt
 
-Set Up ngrok (optional - recommended for security purposes)
+**Set Up ngrok** (optional - recommended for security purposes)
 
 Create a free ngrok account at ngrok.com.
 After creating your account, generate an authentication token.
 Replace the existing authentication token in the OllamaRemoteHost.ipynb file with your own token.
 
-Run the Ollama Host
+**Run the Ollama Host**
 
 Open the OllamaRemoteHost.ipynb file in Google Colab and run the cells step by step.
 This will:
@@ -61,12 +61,12 @@ Download the Ollama model onto Google Colab’s host.
 Launch Ollama with the Mistral model running.
 Once the notebook runs successfully, ngrok will generate a public URL for the Ollama instance.
 
-Update the Public URL
+**Update the Public URL**
 
 Copy the ngrok public URL generated in the previous step.
 Open the Remoteapp.py file and replace the placeholder URL with the one you just copied.
 
-Deploy on GitHub and Streamlit
+**Deploy on GitHub and Streamlit**
 
 Upload the following files to a GitHub repository:
 Remoteapp.py
