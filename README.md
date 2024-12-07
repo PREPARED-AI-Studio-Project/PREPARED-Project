@@ -2,27 +2,27 @@
 
 ## Table of Contents
 1. [Project Overview](#project-overview)
-2. [Project Context](#context)
-3. [Project Goals](#goals)
-4. [File Order](#file-order)
-5. [Model Installation Instruction](#model-installation-instruction)
+    - [Context](#context)
+    - [Goals](#goals)
+2. [File Order](#file-order)
+3. [Model Installation Instruction](#model-installation-instruction)
     - [Local App Installation](#local-app-installation-instructions)
     - [Remote App Installation](#remote-app-installation-instructions)
-6. [Methodology](#methodology)
+4. [Methodology](#methodology)
     - [Data Collection and Preprocessing](#data-collection-and-preprocessing)
     - [Model Development](#model-development)
-7. [Findings and Challenges](#findings-and-challenges)
-8. [Future Steps](#future-steps)
+5. [Findings and Challenges](#findings-and-challenges)
+6. [Future Steps](#future-steps)
 
 ## Project Overview
 The PREPARED Home Safety Advisor is a chatbot-driven platform designed to educate families about emergency and disaster planning, assess their current level of preparedness, and provide personalized safety recommendations and risk assessments. It facilitates easy ordering of essential products to bring families to their desired level of preparedness, with recommendations tailored to their household location and demographics.
 
-## Context
+### Context
 Initially focused on California—specifically Los Angeles County—this project addresses the unique challenges posed by natural disasters such as wildfires, flooding, mudslides, earthquakes, and extreme heat. Los Angeles County is particularly vulnerable to these events, yet many families lack the knowledge or resources to prepare effectively.
 
 While the project started with data specific to LA County, the integration of Ollama and large language models (LLMs) has enabled us to expand the chatbot’s capabilities to cover users nationwide. However, the chatbot remains most specific and accurate for LA County, as this region forms the core of our training dataset.
 
-## Goals
+### Goals
 - Educate families about the fundamentals of emergency and disaster planning.
 - Determine levels of preparedness through assessments and risk evaluations.
 - Provide personalized recommendations for products and practices to improve safety.
